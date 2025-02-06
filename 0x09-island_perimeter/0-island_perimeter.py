@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 class Solution:
     def islandPerimeter(self, grid: list[list[int]]) -> int:
         length_row = len(grid)
