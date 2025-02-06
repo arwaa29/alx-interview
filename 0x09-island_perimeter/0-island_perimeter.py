@@ -1,43 +1,22 @@
 #!/usr/bin/python3
 
-class Solution:
-    def islandPerimeter(self, grid: list[list[int]]) -> int:
-        length_row = len(grid)
-        lengt_column = len(grid[0])
+def island_perimeter(grid):
+    perimeter = 0
+    rows = len(grid)
+    cols = len(grid[0])
 
-        p=0
-        connections = 0
+    for i in range(rows):
+        for j in range(cols):
+            if grid[i][j] == 1:
+                # Start with 4 sides for each land cell
+                perimeter += 4
 
-        for x in range(0, length_row):
-            for y in range(0, length_column):
+                # Subtract 2 if the land cell has a neighbor above
+                if i > 0 and grid[i - 1][j] == 1:
+                    perimeter -= 2
 
-                if grid[x][y] == 1:
-                    p += 4
+                # Subtract 2 if the land cell has a neighbor to the left
+                if j > 0 and grid[i][j - 1] == 1:
+                    perimeter -= 2
 
-                    if x != 0 and grid[x-1][y] == 1:
-                        connections += 1
-                    if y != 0 and grid[x][y-1] == 1:
-                        connections += 1
-        return p - (connections*2)class Solution:
-    def islandPerimeter(self, grid: list[list[int]]) -> int:
-        length_row = len(grid)
-        length_column = len(grid[0])
-
-        p = 0  # Total perimeter
-
-        for x in range(length_row):
-            for y in range(length_column):
-
-                if grid[x][y] == 1:
-                    p += 4  # Start with 4 sides for each land cell
-
-                    # Check if there's a neighboring land cell above
-                    if x > 0 and grid[x-1][y] == 1:
-                        p -= 2  # Subtract 2 for the shared border
-
-                    # Check if there's a neighboring land cell to the left
-                    if y > 0 and grid[x][y-1] == 1:
-                        p -= 2  # Subtract 2 for the shared border
-
-        return p
-
+    return perimeter
