@@ -1,26 +1,19 @@
-def island_perimeter(grid):
-    perimeter = 0
-    rows = len(grid)
-    cols = len(grid[0])
-    
-    for i in range(rows):
-        for j in range(cols):
-            if grid[i][j] == 1:
-                perimeter += 4
-            print(perimeter)
-                # Top
-            if i >  0 and  grid[i-1][j] == 1:
+class Solution:
+    def islandPerimeter(self, grid: list[list[int]]) -> int:
+        length_row = len(grid)
+        lengt_column = len(grid[0])
 
-                perimeter -= 1
-                # Bottom
-            if i < rows - 1 and grid[i+1][j] == 1:
-                perimeter -= 1
-                # Left
-            if j > 0 and grid[i][j-1] == 1:
-                perimeter -= 1
-                # Right
-            if j < cols-1 and grid[i][j+1] == 1:
-                perimeter -= 1
-    
-    return perimeter
+        p=0
+        connections = 0
 
+        for x in range(0, length_row):
+            for y in range(0, length_column):
+
+                if grid[x][y] == 1:
+                    p += 4
+
+                    if x != 0 and grid[x-1][y] == 1:
+                        connections += 1
+                    if y != 0 and grid[x][y-1] == 1:
+                        connections += 1
+        return p - (connections*2)
